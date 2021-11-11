@@ -40,7 +40,7 @@ class KeepingControllerTest {
     public void should_apply_keeping_place_succeed() {
         // given
         String applyKeepingAddress = "http://localhost:" + port + "//contracts/" + contractId + "/safe-keeping";
-        ApplyDTO result = ApplyDTO.builder().applyId(111).applyType("keeping").applyStatus("applying").placeNumber(null).build();
+        ApplyDTO result = ApplyDTO.builder().applyId(111L).applyType("keeping").applyStatus("applying").placeNumber(null).build();
         ApplyKeepingRequest applyKeepingRequest  = ApplyKeepingRequest.builder().goodsType(GoodsType.Car).build();
         when(applicationService.applyKeeping(applyKeepingRequest)).thenReturn(ResultDTO.ok(result));
 
@@ -55,7 +55,7 @@ class KeepingControllerTest {
     @Test
     public void should_query_apply_status_succeed() {
         // given
-        int applyId = 111;
+        long applyId = 111;
         String applyKeepingAddress = "http://localhost:" + port + "//contracts/" + contractId + "/safe-keeping?applyId="+applyId;
         ApplyDTO result = ApplyDTO.builder().applyId(applyId).applyType("keeping").applyStatus("applied").placeNumber("001").build();
         when(applicationService.queryApplyStatus(applyId)).thenReturn(ResultDTO.ok(result, ResultCode.FIND_SUCCEED));

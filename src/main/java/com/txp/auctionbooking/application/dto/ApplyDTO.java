@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ApplyDTO {
-    private Integer applyId;
+    private Long applyId;
     private String applyType;
     private String applyStatus;
     private String placeNumber;
