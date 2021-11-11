@@ -1,4 +1,4 @@
-package com.txp.userservice;
+package com.txp.auctionbooking;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;

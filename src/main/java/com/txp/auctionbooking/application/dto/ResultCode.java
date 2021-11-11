@@ -1,4 +1,4 @@
-package com.txp.userservice.application.dto;
+package com.txp.auctionbooking.application.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
