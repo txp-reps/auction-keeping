@@ -3,10 +3,12 @@ package com.txp.auctionbooking.domain.entities;
 import com.txp.auctionbooking.application.GoodsType;
 import com.txp.auctionbooking.domain.provider.KeepingProvider;
 import com.txp.auctionbooking.domain.repository.KeepingRepository;
+import com.txp.auctionbooking.domain.services.FeatureConfig;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.naming.ServiceUnavailableException;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -51,7 +53,10 @@ public class KeepingEntity {
     @Transient
     private KeepingProvider provider;
 
-    public Optional<KeepingEntity> applyKeepingPlace(GoodsType goodsType) {
+    public Optional<KeepingEntity> applyKeepingPlace(GoodsType goodsType) throws ServiceUnavailableException {
+        if (!FeatureConfig.APPLY_KEEPING_TOGGLE) {
+            throw new ServiceUnavailableException();
+        }
         if (!provider.keepPlaceApply(goodsType)) {
            return Optional.empty();
         }

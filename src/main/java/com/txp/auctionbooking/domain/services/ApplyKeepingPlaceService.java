@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 
+import javax.naming.ServiceUnavailableException;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -25,11 +26,11 @@ public class ApplyKeepingPlaceService {
         this.checker = new AuctionManagerSystemStatusChecker(provider);
     }
 
-    public Optional<KeepingEntity> applyKeepingPlace(GoodsType type) {
+    public Optional<KeepingEntity> applyKeepingPlace(GoodsType type) throws ServiceUnavailableException {
         Optional<KeepingEntity> keepingEntity;
         try {
              keepingEntity = this.keepingEntity.applyKeepingPlace(type);
-        } catch (ResourceAccessException e) {
+        } catch (ResourceAccessException  e) {
             log.error(e.getLocalizedMessage());
             checker.start();
             throw e;

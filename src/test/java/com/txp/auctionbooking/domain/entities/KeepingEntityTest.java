@@ -6,6 +6,8 @@ import com.txp.auctionbooking.infrastructure.externalservice.AuctionManagerSyste
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
+import javax.naming.ServiceUnavailableException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
@@ -16,7 +18,7 @@ class KeepingEntityTest {
     private final AuctionManagerSystem externalService = mock(AuctionManagerSystem.class);
 
     @Test
-    void should_apply_keeping_place_succeed() {
+    void should_apply_keeping_place_succeed() throws ServiceUnavailableException {
         // given
         GoodsType car = GoodsType.Car;
         ArgumentCaptor<KeepingEntity> captor = ArgumentCaptor.forClass(KeepingEntity.class);
