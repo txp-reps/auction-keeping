@@ -24,7 +24,7 @@ public class KeepingController {
     @ApiOperation("申请保管场地")
     @PostMapping("/safe-keeping")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResultDTO<ApplyDTO> buildBoardingCard(@PathVariable Long cid,
+    public ResultDTO<ApplyDTO> applyKeepingPlace(@PathVariable Long cid,
                                                  @RequestBody ApplyKeepingRequest applyKeepingRequest,
                                                  HttpServletResponse httpServletResponse) {
         ResultDTO<ApplyDTO> resultDTO = applicationService.applyKeeping(applyKeepingRequest);

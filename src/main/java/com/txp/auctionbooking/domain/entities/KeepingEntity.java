@@ -33,7 +33,7 @@ public class KeepingEntity {
     @Column(nullable = false)
     private String applyType;
 
-    @Column(nullable = false)
+    @Column
     private String placeNumber;
 
 
