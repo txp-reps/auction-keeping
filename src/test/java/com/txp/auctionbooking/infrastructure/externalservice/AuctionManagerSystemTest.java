@@ -6,11 +6,13 @@ import com.txp.auctionbooking.infrastructure.externalservice.dto.ApplyResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import static com.github.dreamhead.moco.Moco.*;
 import static com.github.dreamhead.moco.Runner.running;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AuctionManagerSystemTest {
     HttpServer httpServer;
@@ -33,6 +35,18 @@ class AuctionManagerSystemTest {
 
             // then
             assertTrue(status);
+        });
+    }
+
+    @Test
+    void should_apply_fail_from_auction_manager_system_with_connection_error() throws Exception {
+        // given
+        String host = "http://localhost:8889";
+        AuctionManagerSystem auctionManagerSystem = new AuctionManagerSystem(new RestTemplate(), host);
+
+        running(httpServer, () -> {
+           // when then
+            assertThrows(ResourceAccessException.class, () -> auctionManagerSystem.keepPlaceApply(GoodsType.Car));
         });
     }
 }
