@@ -21,7 +21,7 @@ public class ResultDTO<T> {
     public static<T> ResultDTO<T> ok(T t, ResultCode code) {
         return ResultDTO.<T>builder()
                 .resultCode(code)
-                .resultMessage("创建成功")
+                .resultMessage("执行成功")
                 .body(t)
                 .build();
     }
@@ -29,7 +29,15 @@ public class ResultDTO<T> {
     public static<T> ResultDTO<T> fail(T t, ResultCode code) {
         return ResultDTO.<T>builder()
                 .resultCode(code)
-                .resultMessage("创建成功")
+                .resultMessage("执行失败")
+                .body(t)
+                .build();
+    }
+
+    public static<T> ResultDTO<T> fail(T t, ResultCode code, String resultMessage) {
+        return ResultDTO.<T>builder()
+                .resultCode(code)
+                .resultMessage(resultMessage)
                 .body(t)
                 .build();
     }

@@ -27,9 +27,6 @@ public class AuctionManagerSystem implements KeepingProvider {
 
         ResponseEntity<ApplyResponse> applyKeepingResponse = restTemplate.postForEntity(applyKeepingPlaceUrl, applyKeepingRequest, ApplyResponse.class);
 
-        if (applyKeepingResponse.getStatusCode() != HttpStatus.CREATED) {
-            return false;
-        }
         return Objects.requireNonNull(applyKeepingResponse.getBody()).getStatus();
     }
 }
