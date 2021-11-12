@@ -37,8 +37,4 @@ public class ApplyKeepingPlaceService {
         }
         return keepingEntity;
     }
-
-    public String checkerStatus() {
-        return this.checker.getStatus();
-    }
 }

@@ -2,12 +2,10 @@ package com.txp.auctionbooking.domain.services;
 
 import com.txp.auctionbooking.infrastructure.externalservice.AuctionManagerSystem;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.web.client.ResourceAccessException;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -23,13 +21,13 @@ class AuctionManagerSystemStatusCheckerTest {
 
         Thread.sleep(3000);
         assertTrue(checker.getCount() >= 1);
-        assertEquals("start", checker.getStatus());
+        assertEquals(CheckerStatus.START, checker.getStatus());
 
         reset(auctionManagerSystem);
         when(auctionManagerSystem.keepPlaceApply(any())).thenReturn(true);
 
         Thread.sleep(3000);
-        assertEquals("stop", checker.getStatus());
+        assertEquals(CheckerStatus.STOP, checker.getStatus());
 
     }
 

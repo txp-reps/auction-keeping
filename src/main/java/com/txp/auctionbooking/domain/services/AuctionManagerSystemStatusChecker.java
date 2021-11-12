@@ -14,7 +14,7 @@ import java.util.TimerTask;
 public class AuctionManagerSystemStatusChecker {
 
     private final KeepingProvider auctionManagerSystem;
-    private String status = "init";
+    private CheckerStatus status = CheckerStatus.INIT;
     private long count;
     private final Timer timer;
 
@@ -25,11 +25,11 @@ public class AuctionManagerSystemStatusChecker {
 
 
     public void start() {
-        if (this.status.equals("start")) {
+        if (this.status == CheckerStatus.START) {
             return;
         }
 
-        this.status = "start";
+        this.status = CheckerStatus.START;
         log.info("AuctionManagerSystemStatusChecker start");
         this.timer.schedule(new Task(),0, 2000);
         FeatureConfig.APPLY_KEEPING_TOGGLE = false;
@@ -37,7 +37,7 @@ public class AuctionManagerSystemStatusChecker {
 
     public void close() {
         this.timer.cancel();
-        status = "stop";
+        status = CheckerStatus.STOP;
         count = 0;
         FeatureConfig.APPLY_KEEPING_TOGGLE = true;
         log.info("AuctionManagerSystemStatusChecker stop");
